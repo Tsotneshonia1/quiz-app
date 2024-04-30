@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Trivia.module.css";
 
-function Trivia() {
+function Trivia({ data, setTimeout, questionNumber, setQuestionNumber }) {
+  const [question, setQuestion] = useState(null);
+
+  useEffect(() => {
+    setQuestion(data[[questionNumber - 1]]);
+  }, [data, questionNumber]);
+
   return (
     <div className={styles.trivia}>
-      <div className={styles.question}>What's the best youtube channel? </div>
+      <div className={styles.question}>{question?.question} </div>
       <div className={styles.answers}>
-      <div className={styles.answer}>Saechvo</div>
-        <div className={styles.answer}>Octopus</div>
-        <div className={styles.answer}>utdr</div>
-        <div className={styles.answer}>Go lets play</div>
+       {question?.answers.map((a) =>( 
+        <div className={styles.answer}>{a.text}</div>
+     ))}
       </div>
     </div>
   );
