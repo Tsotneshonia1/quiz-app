@@ -5,7 +5,56 @@ import { useState } from "react";
 import Trivia from "@/components/Trivia";
 
 export default function Home() {
-  const [questionNumber, setQuestionNumber] = useState(4);
+  const [questionNumber, setQuestionNumber] = useState(1);
+  const [timeOut, setTimeOut] = useState(false);
+
+  const data = [
+    {
+      id: 1,
+      question: "ვინ არის საუკეთესო იუთუბერი",
+      answers: [
+        {
+          text: "საეჭვო",
+          correct: false,
+        },
+        {
+          text: "უტდრ",
+          correct: true,
+        },
+        {
+          text: "თემურა",
+          correct: false,
+        },
+        {
+          text: "akeba",
+          correct: false,
+        },
+      ],
+    },
+
+    {
+      id: 2,
+      question: "ვინ არის საუკეთესო bodibilder",
+      answers: [
+        {
+          text: "Tazo",
+          correct: false,
+        },
+        {
+          text: "me",
+          correct: true,
+        },
+        {
+          text: "sergo",
+          correct: false,
+        },
+        {
+          text: "miqa",
+          correct: false,
+        },
+      ],
+    },
+  ];
 
   const moneyPyramid = [
     { id: 1, amount: "$ 100" },
@@ -29,17 +78,27 @@ export default function Home() {
     <main className={styles.app}>
       <h1> Quiz App </h1>
       <div className={styles.main}>
-      <div className={styles.top}>
-      <div className={styles.timer}>30</div>
-      </div>
-      <div className={styles.bottom}><Trivia/></div>
+        <div className={styles.top}>
+          <div className={styles.timer}>30</div>
+        </div>
+        <div className={styles.bottom}>
+          <Trivia data={data} 
+           setTimeOut={setTimeOut}
+           questionNumber={questionNumber}
+           setQuestionNumber={setQuestionNumber}
+            />
+        </div>
       </div>
       <div className={styles.pyramid}>
         <ul className={styles.moneyList}>
           {moneyPyramid.map((m) => (
             <li
               className={
-                questionNumber === m.id ? "moneyListItem active"  : "moneyListItem"} >
+                questionNumber === m.id
+                  ? "moneyListItem active"
+                  : "moneyListItem"
+              }
+            >
               <span className={styles.moneyListItemNumber}>{m.id}</span>
               <span className={styles.moneyListItemAmount}>{m.amount}</span>
             </li>
